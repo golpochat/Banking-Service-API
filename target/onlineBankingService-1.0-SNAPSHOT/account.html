@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+
+<head>
+    <title>Account</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap 4.4.1-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!--End of Bootstrap 4.4.1-->
+    <link rel="stylesheet" href="global.css">
+    <!-- JQuery 3.4.-->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- End of JQuery 3.4.-->
+
+    <script src="navbar.js"></script>
+    <script src="account.js"></script>
+
+
+</head>
+
+<body
+    style="background-image: url(bank.jpg); background-position: center;background-size:auto;background-repeat: no-repeat;">
+    <header id="include_navbar"></header>
+    <div class="container">
+        <div class="row h-100 justify-content-center" style="margin-top: 180px;"></div>
+        <h1 class="text-center" style="color: white;">Account Management</h1>
+
+
+        <div class="text-center">
+            <h3> Select an account from the menu below:</h3>
+            <div id='dropdown' class='dropdown'>
+                <select id='accountSelector' class=" btn btn-primary dropdown-toggle" type="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                </select>
+            </div>
+            <br>
+            <div class="text-center">
+                <ul class="list-group list-group-horizontal-sm">
+                    <li class="list-group-item col-5"
+                        style="background-color: rgba(0, 123, 255, 0.363); margin: 0 auto;padding: 0;">
+                        <p>Account Balance</p>
+                        <p id='balance'>£0.00</p>
+                    </li>
+                </ul>
+                <br>
+                <ul class="list-group list-group-horizontal-sm">
+                    <li class="list-group-item col-5"
+                        style="background-color: rgba(0, 123, 255, 0.363); margin: 0 auto; padding: 0;">
+                        <p>Sort Code</p>
+                        <p id='sortCode'> NA </p>
+                    </li>
+                </ul>
+                <br>
+            </div>
+
+
+
+            <button class="btn btn-primary" style="padding-top: 10px;"><a href="accountCreate.html">Add new
+                    Account</a></button>
+            <br><br>
+        </div>
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#lodge">Lodge Funds</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#withdraw">Withdraw Funds</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#transferOwn">Transfer to Self</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#transferClient">Transfer to Other</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#transactions" type="button"
+                    onclick="getTransactions()">List of Transactions</a></li>
+        </ul>
+
+
+        <div class="tab-content">
+            <div id="lodge" class="tab-pane fade">
+                <h4 style="color: white;"> Lodge Funds </h4>
+                <div class="form-group">
+                    <input type="number" id="lodgeAmount" value="" placeholder="Lodge Amount">
+                    <input type="text" id="description" value="" placeholder="Description">
+                    <button type="button" onclick="lodgefunds()">Lodge Funds</button>
+                </div>
+            </div>
+            <div id="withdraw" class="tab-pane fade">
+                <h4 style="color: white;"> Withdraw Funds </h4>
+                <div class="form-group">
+                    <input type="number" id="withdrawAmount" value="" placeholder="Withdraw Amount">
+                    <input type="text" id="withdrawDescription" value="" placeholder="Description">
+                    <button type="button" onclick="withdrawfunds()">Withdraw Funds</button>
+                </div>
+            </div>
+            <div id="transferOwn" class="tab-pane fade">
+
+                <h4> Transfer Funds to Own Account</h4>
+
+                <div class="form-group">
+                    <input type="number" id="transferAmount" value="" placeholder="Transfer Amount">
+                    <input type="text" id="transferDescription" value="" placeholder="Description">
+                    <p style="color: white;"> Select an account </p>
+                    <div id='dropdownother' class='dropdown'>
+                        <select id='otherAccountSelector' class="btn  btn-primary dropdown-toggle" type="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </select>
+
+                        <button type="button" class="btn btn-primary" onclick="transferfunds()">Transfer Funds</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="transferClient" class="tab-pane fade">
+                <h4 style="color: white;"> Transfer Funds to Other Client </h4>
+                <div class="form-group">
+                    <input type="number" id="transferAmountEx" value="" placeholder="Transfer Amount">
+                    <input type="text" id="transferDescriptionEx" value="" placeholder="Description">
+                    <p> Select another Client </p>
+                    <div id='dropdownexternal'>
+                        <select id='externalCustomerSelector' class="btn btn-primary dropdown-toggle" type="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </select>
+                    </div>
+                    <p> Select one of their accounts </p>
+                    <div id='dropdownexternalaccount'>
+                        <select id='externalAccountSelector' class="btn btn-primary dropdown-toggle" type="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </select>
+                    
+
+                    <button type="button" class="btn btn-primary" onclick="transferfundsExternal()">Transfer
+                        Funds</button>
+                    </div>
+                </div>
+            </div>
+            <div id="transactions" class="tab-pane fade">
+                <div class="table-responsive">
+                    <table class="accountsTransactions table"
+                        style="width:100%; background-color: rgba(0, 123, 255, 0.363);"></table>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <footer class="footer text-center">
+            <p>G8 Banking 2020</p>
+        </footer>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    color: white;
+    background-color: #28a745;
+}
+
+p, h1, h2, h3, h4, h5, h6, label, a, th, td, tr{
+    color: white;
+}
+
+.borders{
+    border: 1px black solid;
+}
